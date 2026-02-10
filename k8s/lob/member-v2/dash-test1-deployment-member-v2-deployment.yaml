@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: member-v2
+  name: member-v2-deployment
+  namespace: dash-test1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: member-v2
+  template:
+    metadata:
+      labels:
+        app: member-v2
+    spec:
+      containers:
+      - image: ghcr.io/brianprovenzano/kargo-source/member-v2:latest
+        name: member-v2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
